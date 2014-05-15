@@ -1,3 +1,4 @@
+require 'spec_helper'
 require 'roles_on_routes/action_view_extensions/tags_with_roles'
 require 'ostruct'
 
