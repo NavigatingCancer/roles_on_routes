@@ -1,6 +1,8 @@
 require 'roles_on_routes/action_view_extensions/tags_with_roles'
 require 'ostruct'
 
+include ActionView::Helpers::TagHelper
+
 class AnimalsController
 end
 
@@ -26,6 +28,7 @@ describe 'ActionDispatch::Routing::Routeset#roles_for' do
     let(:routeset) { ActionDispatch::Routing::RouteSet.new }
     let(:link_text)   { 'Link Text' }
     let(:action_view) { ActionView::Base.new }
+    let(:block)       { nil }
 
     before do
       routeset.draw do
@@ -50,6 +53,13 @@ describe 'ActionDispatch::Routing::Routeset#roles_for' do
       let (:polymorphic_array) { [Animal.new] }
       it { should include('<a href="/animals/1"') }
       it { should include("#{RolesOnRoutes::TAG_ROLES_ATTRIBUTE}=\"staff not_staff\"") }
+    end
+
+    context 'taking a block' do
+      let (:polymorphic_array) { [Animal.new] }
+      let (:block) { Proc.new { content_tag(:span, 'Special Animal') } }
+      subject { action_view.link_to_with_roles(polymorphic_array, {}, &block) }
+      it { should include('<span>') }
     end
   end
 

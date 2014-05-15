@@ -6,8 +6,17 @@ require 'action_controller'
 module RolesOnRoutes
   module ActionViewExtensions
     module TagsWithRoles
-      def link_to_with_roles(link_text, poly_array, options={})
-        link_to link_text, poly_array, options.merge({ RolesOnRoutes::TAG_ROLES_ATTRIBUTE => roles_from_polymorphic_array(poly_array).join(' ') })
+      def link_to_with_roles(*args, &block)
+        if block_given?
+          html_options_index = 1
+          options = args.first
+        else
+          html_options_index = 2
+          options = args.second
+        end
+        html_options = args[html_options_index] ||= {}
+        html_options.merge!({ RolesOnRoutes::TAG_ROLES_ATTRIBUTE => roles_from_options(options).join(' ') })
+        link_to *args, &block
       end
 
       def content_tag_with_roles(tag_type, roleset, options={}, &block)
@@ -23,8 +32,8 @@ module RolesOnRoutes
 
     private
 
-      def roles_from_polymorphic_array(array)
-        RolesOnRoutes::Base.roles_for(url_for(array))
+      def roles_from_options(options)
+        RolesOnRoutes::Base.roles_for(url_for(options))
       end
     end
   end
