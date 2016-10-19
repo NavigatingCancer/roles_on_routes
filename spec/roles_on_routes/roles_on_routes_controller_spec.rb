@@ -1,3 +1,4 @@
+require 'rails_helper'
 require 'roles_on_routes/roles_on_routes_controller'
 
 class ArbitraryController < ActionController::Base
@@ -16,7 +17,7 @@ describe ArbitraryController do
     subject { controller.send(:authorize_from_role_intersection) }
 
     before do
-      expect(controller).to receive(:request).twice.and_return(double({ path: '/arbitrary', request_method: 'GET' }))
+      expect(controller).to receive(:request).and_return(OpenStruct.new(path: '/arbitrary', action: 'GET'))
       expect(RolesOnRoutes::Base).to receive(:roles_for).with('/arbitrary', 'GET').and_return(roles_from_routes)
     end
 
@@ -41,6 +42,6 @@ describe ArbitraryController do
       it { expect{ subject }.to raise_error NoMethodError }
     end
 
-    it { should == [:user_roles] }
+    it { is_expected.to eq [:user_roles] }
   end
 end

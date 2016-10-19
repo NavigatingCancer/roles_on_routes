@@ -5,8 +5,8 @@ module RolesOnRoutes
   class Base
     class << self
 
-      def authorizes?(path, action, user_roles)
-        route_roles = roles_for(path, action)
+      def authorizes?(request, user_roles)
+        route_roles = roles_for(request.path, request.action)
         (Array.wrap(user_roles) & route_roles).any?
       end
 
