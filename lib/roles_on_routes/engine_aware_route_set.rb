@@ -10,10 +10,8 @@ module RolesOnRoutes
     end
 
     def recognize_path(path, environment={})
-      route_match = @main_routeset.router.send(:find_routes, {
-        'PATH_INFO' => path,
-        'REQUEST_METHOD' => environment[:method]
-      }).first
+      environment.merge!('PATH_INFO' => path)
+      route_match = @main_routeset.router.send(:find_routes, environment).first
 
       if route_match
         journey_route = route_match.last
@@ -34,7 +32,12 @@ module RolesOnRoutes
         end
       end
 
-      @main_routeset.recognize_path(path, environment)
+      uri = "#{environment['rack.url_scheme']}://#{environment['HTTP_HOST']}#{path}"
+      extras = {
+        method: environment['REQUEST_METHOD'],
+        extras: environment['QUERY_STRING'],
+      }
+      @main_routeset.recognize_path(uri, extras)
     end
   end
 end

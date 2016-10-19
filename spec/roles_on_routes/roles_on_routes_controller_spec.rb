@@ -14,11 +14,12 @@ end
 describe ArbitraryController do
   describe '#authorize_from_role_intersection' do
     let (:controller) { ArbitraryController.new }
+    let (:fake_environment) { { 'KEY' => 'SOME ENVIRONMENT'} }
     subject { controller.send(:authorize_from_role_intersection) }
 
     before do
-      expect(controller).to receive(:request).and_return(OpenStruct.new(path: '/arbitrary', action: 'GET'))
-      expect(RolesOnRoutes::Base).to receive(:roles_for).with('/arbitrary', 'GET').and_return(roles_from_routes)
+      expect(controller).to receive(:request).and_return(OpenStruct.new(path: '/arbitrary', env: fake_environment ))
+      expect(RolesOnRoutes::Base).to receive(:roles_for).with('/arbitrary', fake_environment).and_return(roles_from_routes)
     end
 
     context 'roles match' do

@@ -6,12 +6,12 @@ module RolesOnRoutes
     class << self
 
       def authorizes?(request, user_roles)
-        route_roles = roles_for(request.path, request.action)
+        route_roles = roles_for(request.path, request.env)
         (Array.wrap(user_roles) & route_roles).any?
       end
 
-      def roles_for(path, verb='GET')
-        path_params = Configuration.routeset_containing_roles.recognize_path(path, { method: verb })
+      def roles_for(path, environment={})
+        path_params = Configuration.routeset_containing_roles.recognize_path(path, environment)
         action = path_params[:action]
         roleset_name = action_roles_from_path(path_params, action) || roles_from_path(path_params)
         Configuration.role_collection.execute(roleset_name, path_params)

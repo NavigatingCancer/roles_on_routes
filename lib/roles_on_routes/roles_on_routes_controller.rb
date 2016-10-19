@@ -13,7 +13,6 @@ module RolesOnRoutes
     private
 
     def authorize_from_role_intersection
-      #binding.pry
       return true if ::RolesOnRoutes::Base.authorizes?(request, current_user_roles)
       role_authorization_failure_response
     end

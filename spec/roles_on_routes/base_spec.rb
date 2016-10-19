@@ -16,6 +16,12 @@ describe RolesOnRoutes::Base do
     let(:path)        { '/animals' }
     let(:action)      { 'GET' }
     let(:roleset)     { [:staff] }
+    let(:request_environment) do
+      {
+        'PATH_INFO' => path,
+        'REQUEST_METHOD' => action,
+      }
+    end
 
     before do
       r = roleset # Scoping problem when defining routes if only set in lets
@@ -43,7 +49,7 @@ describe RolesOnRoutes::Base do
       RolesOnRoutes::Configuration.routeset_containing_roles = routeset
     end
 
-    subject { RolesOnRoutes::Base.roles_for(path, action) }
+    subject { RolesOnRoutes::Base.roles_for(path, request_environment) }
 
     context 'bad path' do
       let (:path) { '/donkey' }
