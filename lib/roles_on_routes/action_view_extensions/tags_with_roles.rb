@@ -27,7 +27,7 @@ module RolesOnRoutes
     private
 
       def roles_from_polymorphic_array(array)
-        RolesOnRoutes::Base.roles_for(url_for(array))
+        RolesOnRoutes::Base.roles_for(url_for(array), request.env)
       end
     end
   end

@@ -38,6 +38,7 @@ describe 'ActionDispatch::Routing::Routeset#roles_for' do
       RolesOnRoutes::Configuration.routeset_containing_roles = routeset
       routeset.install_helpers
       action_view._routes = routeset
+      allow(action_view).to receive(:request).and_return(OpenStruct.new(env: {}))
     end
 
     subject { action_view.link_to_with_roles(link_text, polymorphic_array) }
