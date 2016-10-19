@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    roles_on_routes (0.2.3)
+    roles_on_routes (0.2.4)
       rails (~> 3.0)
 
 GEM
@@ -129,4 +129,4 @@ DEPENDENCIES
   test-unit
 
 BUNDLED WITH
-   1.12.5
+   1.13.5
