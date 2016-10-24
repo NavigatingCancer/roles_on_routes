@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe RolesOnRoutes::EngineAwareRouteSet, :type => :routing do
+describe 'Routing with constraints and roles', :type => :routing do
   let(:routing_param_extras) { {} }
   let(:routing_params) do
     {
