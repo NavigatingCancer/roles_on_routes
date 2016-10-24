@@ -1,5 +1,5 @@
+require 'rails_helper'
 require 'roles_on_routes/base'
-require 'ostruct'
 
 class AnimalsController
 end
