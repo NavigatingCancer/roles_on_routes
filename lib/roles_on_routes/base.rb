@@ -17,6 +17,10 @@ module RolesOnRoutes
         Configuration.role_collection.execute(roleset_name, path_params)
       end
 
+      def role_params(environment)
+        environment["nc.roles_on_routes.extra_parameters"] ||= {}
+      end
+
       private
 
       def action_roles_from_path(pathset, action)

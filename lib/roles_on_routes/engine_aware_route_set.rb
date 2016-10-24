@@ -37,7 +37,12 @@ module RolesOnRoutes
         method: environment['REQUEST_METHOD'],
         extras: environment['QUERY_STRING'],
       }
-      @main_routeset.recognize_path(uri, extras)
+      @main_routeset.recognize_path(uri, extras).tap do |path_parameters|
+        #append any extra params that roles_on_routes may want
+        RolesOnRoutes::Base.role_params(environment).each do |key,value|
+          path_parameters[key] = value
+        end
+      end
     end
   end
 end
