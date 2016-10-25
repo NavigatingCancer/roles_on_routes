@@ -34,8 +34,8 @@ module RolesOnRoutes
 
       uri = "#{environment['rack.url_scheme']}://#{environment['HTTP_HOST']}#{path}"
       extras = {
-        method: environment['REQUEST_METHOD'],
-        extras: environment['QUERY_STRING'],
+        method: environment['REQUEST_METHOD'].dup,
+        extras: environment['QUERY_STRING'].dup,
       }
       @main_routeset.recognize_path(uri, extras).tap do |path_parameters|
         #append any extra params that roles_on_routes may want
