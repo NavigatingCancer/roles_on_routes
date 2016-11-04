@@ -25,19 +25,23 @@ module RolesOnRoutes
         if engine.respond_to?(:routes)
           begin
             engine_path = path.gsub(journey_route.path.to_regexp, '')
-            return engine.routes.recognize_path(engine_path, environment)
+            return params_from_app_and_path_and_rack_enviroment(engine.routes, engine_path, environment)
           rescue ActionController::RoutingError
             Rails.logger.info("RoutingError occurred applying RolesOnRoutes to an engine")
           end
         end
       end
 
+      params_from_app_and_path_and_rack_enviroment(@main_routeset, path, environment)
+    end
+
+    def params_from_app_and_path_and_rack_enviroment(routes, path, environment)
       uri = "#{environment['rack.url_scheme']}://#{environment['HTTP_HOST']}#{path}"
-      extras = {
+      env = {
         method: environment['REQUEST_METHOD'].dup,
         extras: environment['QUERY_STRING'].dup,
       }
-      @main_routeset.recognize_path(uri, extras).tap do |path_parameters|
+      routes.recognize_path(uri, env).tap do |path_parameters|
         #append any extra params that roles_on_routes may want
         RolesOnRoutes::Base.role_params(environment).each do |key,value|
           path_parameters[key] = value
