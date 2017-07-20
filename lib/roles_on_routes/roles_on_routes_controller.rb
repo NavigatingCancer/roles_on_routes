@@ -15,6 +15,9 @@ module RolesOnRoutes
     def authorize_from_role_intersection
       return true if ::RolesOnRoutes::Base.authorizes?(request, current_user_roles)
       role_authorization_failure_response
+      # Guarantee access is denied if not authorized, in case
+      # role_authorization_failure_response fails to render or redirect.
+      render nothing: true, status: :unauthorized unless performed?
     end
 
     def current_user_roles
@@ -22,8 +25,6 @@ module RolesOnRoutes
       super
     end
 
-    # If you override this, make sure it calls redirect_to or render in order
-    # to protect against unauthorized access and CSRF.
     def role_authorization_failure_response
       render nothing: true, status: :unauthorized
     end
