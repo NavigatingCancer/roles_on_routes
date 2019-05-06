@@ -25,7 +25,9 @@ module RolesOnRoutes
     # If you override this, make sure it calls redirect_to or render in order
     # to protect against unauthorized access and CSRF.
     def role_authorization_failure_response
-      render nothing: true, status: :unauthorized
+      # render nothing: true, status: :unauthorized
+      Rails.logger.info("RolesOnRoutes: redirecting to /auth/auth0")
+      redirect_to '/auth/auth0', status: :unauthorized
     end
 
   end
