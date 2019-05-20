@@ -13,7 +13,14 @@ module RolesOnRoutes
     private
 
     def authorize_from_role_intersection
+      Rails.logger.info "111111111111111111111111111"
       return true if ::RolesOnRoutes::Base.authorizes?(request, current_user_roles)
+      Rails.logger.info "authorizes FAILED ! redirecting now"
+
+      # FIXME this redirection works but RolesOnRoutes should only do AuthZ not
+      # AuthN ??
+      redirect_to '/auth/auth0'
+      return
       role_authorization_failure_response
     end
 
@@ -25,9 +32,7 @@ module RolesOnRoutes
     # If you override this, make sure it calls redirect_to or render in order
     # to protect against unauthorized access and CSRF.
     def role_authorization_failure_response
-      # render nothing: true, status: :unauthorized
-      Rails.logger.info("RolesOnRoutes: redirecting to /auth/auth0")
-      redirect_to '/auth/auth0', status: :unauthorized
+      render nothing: true, status: :unauthorized
     end
 
   end

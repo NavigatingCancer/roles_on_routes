@@ -3,3 +3,4 @@ Gemfile.lock
 *.swp
 Session.vim
 /spec/dummy/log/
+.undodir

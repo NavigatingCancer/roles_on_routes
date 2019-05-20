@@ -7,7 +7,11 @@ module RolesOnRoutes
 
       def authorizes?(request, user_roles)
         route_roles = roles_for(request.path, request.env)
-        (Array.wrap(user_roles) & route_roles).any?
+        Rails.logger.info "Route Roles : #{route_roles.inspect}"
+        Rails.logger.info "user roles : #{user_roles.inspect}"
+        do_it = (Array.wrap(user_roles) & route_roles).any?
+        Rails.logger.info "authorizes? returns : " + do_it.to_s
+        do_it
       end
 
       def roles_for(path, environment={})
