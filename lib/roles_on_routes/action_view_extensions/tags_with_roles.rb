@@ -12,6 +12,7 @@ module RolesOnRoutes
     module TagsWithRoles
       # @deprecated
       def link_to_with_roles(link_text, poly_array, options={})
+        Rails.logger.info "link_to_with_roles called : 888888888888888"
         link_to link_text, poly_array, options.merge({ RolesOnRoutes::TAG_ROLES_ATTRIBUTE => roles_from_polymorphic_array(poly_array).join(' ') })
       end
 
