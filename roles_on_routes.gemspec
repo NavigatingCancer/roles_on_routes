@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
   s.summary     = 'Define your authorization roles on the routes they apply to'
   s.description = %q{ }
 
-  s.add_dependency 'rails', '~> 3.0'
+  s.add_dependency 'rails', '~> 3.2', '>= 3.2.22.5'
 
   #s.files         = `git ls-files`.split("\n")
   #s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
