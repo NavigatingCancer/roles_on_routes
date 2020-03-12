@@ -10,7 +10,6 @@ Gem::Specification.new do |s|
   s.description = %q{ }
 
   s.add_dependency 'rails', '~> 3.2'
-  s.add_dependency 'json', '~> 1.4'
   #s.files         = `git ls-files`.split("\n")
   #s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
   #s.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
