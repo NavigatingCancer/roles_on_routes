@@ -1,8 +1,16 @@
+GIT
+  remote: git://github.com/flori/json.git
+  revision: 7f4cfd853f2c919d854fb95548a19980feff17e8
+  branch: v1.8
+  specs:
+    json (1.8.6)
+
 PATH
   remote: .
   specs:
     roles_on_routes (0.2.4)
-      rails (~> 3.0)
+      json (~> 1.4)
+      rails (~> 3.2)
 
 GEM
   remote: https://rubygems.org/
@@ -43,8 +51,7 @@ GEM
     hike (1.2.3)
     i18n (0.7.0)
     journey (1.0.4)
-    json (1.8.3)
-    mail (2.5.4)
+    mail (2.5.5)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
     method_source (0.8.2)
@@ -116,12 +123,13 @@ GEM
     treetop (1.4.15)
       polyglot
       polyglot (>= 0.3.1)
-    tzinfo (0.3.51)
+    tzinfo (0.3.56)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
+  json!
   pry-byebug
   pry-rails
   roles_on_routes!
@@ -129,4 +137,4 @@ DEPENDENCIES
   test-unit
 
 BUNDLED WITH
-   1.13.5
+   1.17.2
