@@ -8,7 +8,7 @@ Gem::Specification.new do |s|
   s.authors     = ['Navigating Cancer']
   s.summary     = 'Define your authorization roles on the routes they apply to'
   s.description = %q{ }
-  s.add_dependency 'rails', '~> 3.2'
+  s.add_dependency 'rails', '>= 3.2', '< 4.1'
   s.required_ruby_version = '>= 2.3.8'
 
   #s.files         = `git ls-files`.split("\n")
