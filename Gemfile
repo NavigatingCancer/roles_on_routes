@@ -16,4 +16,6 @@ group :development,:test do
   gem 'pry-rails'
   gem 'pry-byebug'
   gem 'test-unit'
+  gem 'capybara'
+  gem 'webdrivers'
 end

@@ -23,6 +23,12 @@ describe RolesOnRoutes::Base do
       }
     end
 
+    around do |example|
+      save = RolesOnRoutes::Configuration.routeset_containing_roles
+      example.run
+      RolesOnRoutes::Configuration.routeset_containing_roles = save
+    end
+
     before do
       r = roleset # Scoping problem when defining routes if only set in lets
 
