@@ -1,8 +1,8 @@
 PATH
   remote: .
   specs:
-    roles_on_routes (0.2.4)
-      rails (~> 3.2)
+    roles_on_routes (0.3.0)
+      rails (>= 3.2, < 4.1)
 
 GEM
   remote: https://rubygems.org/
@@ -124,6 +124,7 @@ PLATFORMS
 DEPENDENCIES
   pry-byebug
   pry-rails
+  rails (= 3.2.22.5)
   roles_on_routes!
   rspec-rails
   test-unit
