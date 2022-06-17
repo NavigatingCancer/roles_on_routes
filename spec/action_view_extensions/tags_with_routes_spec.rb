@@ -107,3 +107,25 @@ describe 'ActionDispatch::Routing::Routeset#roles_for' do
     end
   end
 end
+
+module ActionDispatch
+  module Routing
+    class RouteSet
+      def install_helpers(destinations = [ActionController::Base, ActionView::Base], regenerate_code = false)
+        Array(destinations).each { |d| d.module_eval {
+          include ActionView::Helpers;
+          include ActionDispatch::Routing::UrlFor
+          } }
+        named_routes.install(destinations, regenerate_code)
+      end
+      class NamedRouteCollection
+        def install(destinations = [ActionController::Base,ActionView::Base], regenerate = false)
+          reset! if regenerate
+          Array(destinations).each do |dest|
+            dest.__send__(:include, @module)
+          end
+        end
+      end
+    end
+  end
+end
