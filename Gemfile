@@ -17,3 +17,7 @@ group :development,:test do
   gem 'pry-byebug'
   gem 'test-unit'
 end
+
+group :development do
+  gem 'next_rails'
+end
