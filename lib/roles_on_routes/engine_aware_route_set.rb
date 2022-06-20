@@ -1,3 +1,4 @@
+require 'rack'
 module RolesOnRoutes
   class EngineAwareRouteSet
 
@@ -39,7 +40,7 @@ module RolesOnRoutes
       uri = "#{environment['rack.url_scheme']}://#{environment['HTTP_HOST']}#{path}"
       env = {
         method: environment['REQUEST_METHOD'].dup,
-        extras: environment['QUERY_STRING'].dup,
+        extras: Rack::Utils.parse_nested_query(environment['QUERY_STRING'].dup),
       }
       routes.recognize_path(uri, env).tap do |path_parameters|
         #append any extra params that roles_on_routes may want

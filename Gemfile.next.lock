@@ -2,6 +2,7 @@ PATH
   remote: .
   specs:
     roles_on_routes (0.3.0)
+      rack
       rails (>= 3.2, < 4.1)
 
 GEM
@@ -31,9 +32,19 @@ GEM
       multi_json (~> 1.3)
       thread_safe (~> 0.1)
       tzinfo (~> 0.3.37)
+    addressable (2.8.0)
+      public_suffix (>= 2.0.2, < 5.0)
     arel (4.0.2)
     builder (3.1.4)
     byebug (9.0.6)
+    capybara (2.18.0)
+      addressable
+      mini_mime (>= 0.1.3)
+      nokogiri (>= 1.3.3)
+      rack (>= 1.0.0)
+      rack-test (>= 0.5.4)
+      xpath (>= 2.0, < 4.0)
+    childprocess (3.0.0)
     coderay (1.1.1)
     colorize (0.8.1)
     concurrent-ruby (1.1.10)
@@ -45,10 +56,13 @@ GEM
       mini_mime (>= 0.1.1)
     method_source (0.8.2)
     mini_mime (1.1.2)
+    mini_portile2 (2.4.0)
     minitest (4.7.5)
     multi_json (1.15.0)
     next_rails (1.0.5)
       colorize (>= 0.8.1)
+    nokogiri (1.10.10)
+      mini_portile2 (~> 2.4.0)
     power_assert (0.3.1)
     pry (0.10.4)
       coderay (~> 1.1.0)
@@ -59,6 +73,7 @@ GEM
       pry (~> 0.10)
     pry-rails (0.3.4)
       pry (>= 0.9.10)
+    public_suffix (4.0.7)
     rack (1.5.5)
     rack-test (0.6.3)
       rack (>= 1.0)
@@ -93,6 +108,10 @@ GEM
       rspec-mocks (~> 3.5.0)
       rspec-support (~> 3.5.0)
     rspec-support (3.5.0)
+    rubyzip (1.3.0)
+    selenium-webdriver (3.142.7)
+      childprocess (>= 0.5, < 4.0)
+      rubyzip (>= 1.2.2)
     slop (3.6.0)
     sprockets (3.7.2)
       concurrent-ruby (~> 1.0)
@@ -106,11 +125,18 @@ GEM
     thor (1.2.1)
     thread_safe (0.3.6)
     tzinfo (0.3.60)
+    webdrivers (4.2.0)
+      nokogiri (~> 1.6)
+      rubyzip (>= 1.3.0)
+      selenium-webdriver (>= 3.0, < 4.0)
+    xpath (3.2.0)
+      nokogiri (~> 1.8)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
+  capybara
   next_rails
   pry-byebug
   pry-rails
@@ -118,6 +144,7 @@ DEPENDENCIES
   roles_on_routes!
   rspec-rails
   test-unit
+  webdrivers
 
 BUNDLED WITH
    1.17.3
