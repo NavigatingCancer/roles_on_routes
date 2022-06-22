@@ -41,3 +41,4 @@ module RolesOnRoutes
 end
 
 ActionView::Base.send :include, RolesOnRoutes::ActionViewExtensions::TagsWithRoles
+ActionView::Base.send :include, ActionDispatch::Routing::UrlFor
