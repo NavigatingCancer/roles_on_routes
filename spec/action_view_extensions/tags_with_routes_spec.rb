@@ -108,12 +108,12 @@ describe 'ActionDispatch::Routing::Routeset#roles_for' do
   end
 end
 
+# Monkey patch added to fix the install helper error for test cases
 module ActionDispatch
   module Routing
     class RouteSet
       def install_helpers(destinations = [ActionController::Base, ActionView::Base], regenerate_code = false)
         Array(destinations).each { |d| d.module_eval {
-          include ActionView::Helpers;
           include ActionDispatch::Routing::UrlFor
           } }
         named_routes.install(destinations, regenerate_code)
