@@ -45,14 +45,14 @@ describe 'ActionDispatch::Routing::Routeset#roles_for' do
 
     context 'animals index' do
       let (:polymorphic_array) { [:animals] }
-      it { should match(/\/animals/) }
+      it { should match(/href=(["'])\/animals/) }
       it { should include(link_text) }
       it { should include("#{RolesOnRoutes::TAG_ROLES_ATTRIBUTE}=\"staff\"") }
     end
 
     context 'animals show' do
       let (:polymorphic_array) { [Animal.new] }
-      it { should match(/\/animals\/1/) }
+      it { should match(/href=(["'])\/animals\/1/) }
       it { should include("#{RolesOnRoutes::TAG_ROLES_ATTRIBUTE}=\"staff not_staff\"") }
     end
   end
