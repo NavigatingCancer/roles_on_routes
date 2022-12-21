@@ -34,4 +34,8 @@ Dummy::Application.configure do
 
   # Print deprecation notices to the stderr
   config.active_support.deprecation = :stderr
+  # In Rails 4 we need to set this to false for Test env. https://github.com/rails/rails/blob/4-0-stable/railties/lib/rails/application/bootstrap.rb#L22
+  unless Gem::Version.new(Rails.version) < Gem::Version.new('4.0')
+    config.eager_load = false
+  end
 end

@@ -45,14 +45,14 @@ describe 'ActionDispatch::Routing::Routeset#roles_for' do
 
     context 'animals index' do
       let (:polymorphic_array) { [:animals] }
-      it { should include('<a href="/animals"') }
+      it { should match(/href=(["'])\/animals/) }
       it { should include(link_text) }
       it { should include("#{RolesOnRoutes::TAG_ROLES_ATTRIBUTE}=\"staff\"") }
     end
 
     context 'animals show' do
       let (:polymorphic_array) { [Animal.new] }
-      it { should include('<a href="/animals/1"') }
+      it { should match(/href=(["'])\/animals\/1/) }
       it { should include("#{RolesOnRoutes::TAG_ROLES_ATTRIBUTE}=\"staff not_staff\"") }
     end
   end
@@ -104,6 +104,28 @@ describe 'ActionDispatch::Routing::Routeset#roles_for' do
       end
 
       it { should == "<td #{RolesOnRoutes::TAG_ROLES_ATTRIBUTE}=\"foobar_123\">#{arbitrary_text}</td>" }
+    end
+  end
+end
+
+# Monkey patch added to fix the install helper error for test cases
+module ActionDispatch
+  module Routing
+    class RouteSet
+      def install_helpers(destinations = [ActionController::Base, ActionView::Base], regenerate_code = false)
+        Array(destinations).each { |d| d.module_eval {
+          include ActionDispatch::Routing::UrlFor
+          } }
+        named_routes.install(destinations, regenerate_code)
+      end
+      class NamedRouteCollection
+        def install(destinations = [ActionController::Base,ActionView::Base], regenerate = false)
+          reset! if regenerate
+          Array(destinations).each do |dest|
+            dest.__send__(:include, @module)
+          end
+        end
+      end
     end
   end
 end
