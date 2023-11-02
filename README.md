@@ -1,3 +1,8 @@
+# Important Note!!!!
+This repository has been archived and collapsed into GC as of November 2nd 2023.
+Please see https://github.com/NavigatingCancer/gc/tree/develop/nc_gems/roles_on_routes for any future changes
+
+
 # Roles On Routes
 
 Roles On Routes was written by Navigating Cancer.
